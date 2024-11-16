@@ -1,0 +1,6 @@
+
+
+class Effector {
+	constructor() {}
+	
+}

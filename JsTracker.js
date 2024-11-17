@@ -135,30 +135,6 @@ class Main extends App {
 		this.inst.insttypSelected(this, 0);
 		
 		/*
-		this.lay_instpack = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt_instpack = ui.addText(this.lay_instpack, "Expantion Pack: ", "Center, Singleline", 0.5, -1);
-		this.sel_instpack = ui.addSelect(this.lay_instpack, items_pack,  "Center, Outlined, Small",  0.5, -1);
-		this.sel_instpack.backColor = "#a1acbf";
-		this.sel_instpack.textColor = "#000000";
-		this.sel_instpack.value = "All";
-		this.sel_instpack.setOnChange(this.instpackOnChange);
-		
-		this.lay_instgen = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt_instgen = ui.addText(this.lay_instgen, "Genre: ", "Center, Singleline", 0.5, -1);
-		this.sel_instgen = ui.addSelect(this.lay_instgen, items_genre,  "Center, Outlined, Small",  0.5, -1);
-		this.sel_instgen.backColor = "#a1acbf";
-		this.sel_instgen.textColor = "#000000";
-		this.sel_instgen.value = "Techno";
-		this.sel_instgen.setOnChange(this.instgenOnChange);
-		
-		this.lay_insttyp = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt_insttyp = ui.addText(this.lay_insttyp, "Instrument Type: ", "Center, Singleline", 0.5, -1);
-		this.sel_insttyp = ui.addSelect(this.lay_insttyp, items_inst,  "Center, Outlined, Small",  0.5, -1);
-		this.sel_insttyp.backColor = "#a1acbf";
-		this.sel_insttyp.textColor = "#000000";
-		this.sel_insttyp.value = "Bass";
-		this.sel_insttyp.setOnChange(this.insttypOnChange);
-		
 		this.lay_instname = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
 		this.txt_instname = ui.addText(this.lay_instname, "Instrument Name: ", "Center, Singleline", 0.5, -1);
 		this.sel_instname = ui.addSelect(this.lay_instname, items_instname,  "Center, Outlined, Small",  0.5, -1);
@@ -166,14 +142,6 @@ class Main extends App {
 		this.sel_instname.textColor = "#000000";
 		this.sel_instname.setOnOpen(this.instnameOnOpen);
 		this.sel_instname.setOnChange(this.instnameOnChange);
-		
-		this.lay_instsmpl = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt_instsmpl = ui.addText(this.lay_instsmpl, "Base Sample: ", "Center, Singleline", 0.5, -1);
-		this.sel_instsmpl = ui.addSelect(this.lay_instsmpl, items_instsmpl,  "Center, Outlined, Small",  0.5, -1);
-		this.sel_instsmpl.backColor = "#a1acbf";
-		this.sel_instsmpl.textColor = "#000000";
-		this.sel_instsmpl.setOnOpen(this.instsmplOnOpen);
-		this.sel_instsmpl.setOnChange(this.instsmplOnChange);
 		
 		this.lay_instdtune = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
 		this.txt0_instdtune = ui.addText(this.lay_instdtune, "Detune: ", "Center, Singleline", 0.25, -1);
@@ -293,11 +261,11 @@ class Main extends App {
 	}
 	
 	instplayOnTouch() {
-		
+		this.inst.play(this);
 	}
 	
 	inststopOnTouch() {
-		
+		this.inst.stop(this);
 	}
 	
 	instdtuneOnChange(value) {

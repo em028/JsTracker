@@ -1,16 +1,19 @@
 
 class Instrument extends Samplers {
 	constructor(samplers) {
-		super(samplers._gmname, samplers._name, samplers._baseSamples, samplers._urls);
+		super(samplers._gmname, samplers._name, samplers._baseSamples, samplers._urls, samplers._volume);
 		this.sampler = new Tone.Sampler({urls: this._urls, baseUrl: gitUrl});
-		this.sampler.toDestination();
-		Tone.ToneAudioBuffer.loaded().then( () => {
-			this.sampler.triggerAttackRelease(["C2","C3","E4","G4","B4"], 14)
-		});
+		this.pan = new Tone.Panner3D(0,0,0);
+		this.vol = new Tone.Volume(this._volume);
+		this.sampler.connect(this.pan);
+		this.pan.connect(this.vol);
+		this.vol.connect(Tone.Destination);
 	}
 	
 	dispose() {
 		this.sampler.dispose();
+		this.pan.dispose();
+		this.vol.dispose();
 	}
 	
 	changeAllAttributes() {
@@ -18,8 +21,13 @@ class Instrument extends Samplers {
 	}
 }
 
+
+/*
+	Imstrument Component Class
+*/
 class InstrumentComponents {
 	constructor() {
+		this.tmp_event = [];
 	}
 	
 	insttypSelected(main, value) {
@@ -53,7 +61,40 @@ class InstrumentComponents {
 			tmp_instrument.dispose();
 			tmp_instrument = null;
 		}
+		main.btn_instload.disabled = true;
+		main.btn_instplay.disabled = true;
+		main.btn_inststop.disabled = true;
 		tmp_instrument = new Instrument(samplers[tmp_samplersid[main.sld_instname.value]]);
+		Tone.ToneAudioBuffer.loaded().then( () => {
+			main.btn_instload.disabled = false;
+			main.btn_instplay.disabled = false;
+			main.btn_inststop.disabled = false;
+			/*
+			tmp_instrument.sampler.triggerAttackRelease(["C2","C3","E4","G4","B4"], 14)
+			*/
+		});
+	}
+	
+	play(main) {
+		this.tmp_event.length = 0;
+		this.tmp_event.push(new Tone.ToneEvent( (time) => {
+			tmp_instrument.sampler.triggerAttack(["C2","C3","E4","G4","B4"]);
+		}));
+		this.tmp_event.push(new Tone.ToneEvent( (time) => {
+			tmp_instrument.sampler.triggerRelease(["C2","C3","E4","G4","B4"]);
+		}));
+		Tone.Transport.schedule((time) => {
+			this.tmp_event[0].start();
+			this.tmp_event[1].start(5);
+		});
+		Tone.Transport.start();
+	}
+	
+	stop(main) {
+		Tone.Transport.stop();
+		this.tmp_event[0].dispose();
+		this.tmp_event[1].dispose();
+		tmp_instrument.sampler.triggerRelease(["C2","C3","E4","G4","B4"]);
 	}
 	
 	detuneChanged(main, value) {

@@ -2,11 +2,12 @@
 var sampleUrls = [];
 
 class Samplers {
-	constructor(gmname, name, baseSamples, urls) {
+	constructor(gmname, name, baseSamples, urls, volume) {
 		this._gmname = gmname;
 		this._name = name;
 		this._baseSamples = baseSamples;
 		this._urls = urls;
+		this._volume = volume;
 	}
 }
 
@@ -45,7 +46,8 @@ samplers.push(new Samplers(
 	"Acoustic Piano", "Grand Piano", "001001",sampleUrls[0]
 ));
 samplers.push(new Samplers(
-	"Acoustic Piano", "Grand Piano Dummy", "001001",sampleUrls[0]
+	"Acoustic Piano", "Grand Piano Dummy", "001001",
+	sampleUrls[0], -6
 ));
 
 sampleUrls[1] = {
@@ -80,5 +82,6 @@ sampleUrls[1] = {
 	C8 : "001/00100228.ogg",
 	};
 samplers.push(new Samplers(
-	"Acoustic Piano", "Steinway Piano", "001002",sampleUrls[1]
+	"Acoustic Piano", "Steinway Piano", "001002",
+	sampleUrls[1], -6
 ));

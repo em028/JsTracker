@@ -81,7 +81,7 @@ class Main extends App {
 		this.lay_inst =  ui.addLayout(this.tab_inst, "Linear", "Vertical", 1.0, 1.0);
 		this.lay_inst.backColor = "#687074";
 		this.lay_inst.textColor = "#fffff0";
-		this.lay_inst.setChildMargins(0.01, 0, 0, 0.01);
+		this.lay_inst.setChildMargins(0, 0, 0, 0.01);
 		
 		this.lay_instid = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
 		this.txt0_instid = ui.addText(this.lay_instid, "Instrument Index: ", "Center", 0.4, -1);
@@ -118,6 +118,24 @@ class Main extends App {
 		this.sld_instname.disabled = true;
 		this.sld_instname.setOnChange(this.instnameOnChange);
 		this.sld_instname.setOnSelect(this.instnameOnSelect);
+		
+		this.lay_instnote = ui.addLayout(this.lay_inst, "Linear", "Horizontal, FillX", 1.0, -1);
+		this.btn_instnotel = ui.addButton(this.lay_instnote, "", " Small", 0.15, -1);
+		this.btn_instnotel.setOnTouch(this.instnotelOnTouch);
+		this.btn_instnotel.icon = "arrow_left";
+		this.btn_instnotel.backColor = "#aaaabf";
+		this.btn_instnoter = ui.addButton(this.lay_instnote, "", " Small", 0.15, -1);
+		this.btn_instnoter.setOnTouch(this.instnoterOnTouch);
+		this.btn_instnoter.icon = "arrow_right";
+		this.btn_instnoter.backColor = "#aaaabf";
+		this.txt_instnote = ui.addText(this.lay_instnote, "C4", "Center", 0.2, -1);
+		this.sld_instnote = ui.addSlider(this.lay_instnote, 0,  "Primary", 0.5, -1);
+		this.sld_instnote.setPadding(0, 0, 0.03, 0);
+		this.sld_instnote.step = 1;
+		this.sld_instnote.marks = true;
+		this.sld_instnote.minValue = 0;
+		this.sld_instnote.maxValue = 11;
+		this.sld_instnote.setOnChange(this.instnoteOnChange);
 		
 		this.lay_instload = ui.addLayout(this.lay_inst, "Linear", "Horizontal", -1, -1);
 		this.btn_instload = ui.addButton(this.lay_instload, "Load", " Small", -1, -1);
@@ -254,6 +272,18 @@ class Main extends App {
 	
 	instnameOnChange(item) {
 		this.txt_instname.text = items_instname[item];
+	}
+	
+	instnotelOnTouch() {
+		this.inst.octaveDown(this);
+	}
+	
+	instnoterOnTouch() {
+		this.inst.octaveUp(this)
+	}
+	
+	instnoteOnChange(item) {
+		this.txt_instnote.text = items_note[item]+tmp_octave;
 	}
 	
 	instloadOnTouch() {

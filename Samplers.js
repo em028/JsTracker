@@ -43,7 +43,8 @@ sampleUrls[0] = {
 	C8 : "001/00100128.ogg",
 	};
 samplers.push(new Samplers(
-	"Acoustic Piano", "Grand Piano", "001001",sampleUrls[0]
+	"Acoustic Piano", "Grand Piano", "001001",
+	sampleUrls[0], -1
 ));
 samplers.push(new Samplers(
 	"Acoustic Piano", "Grand Piano Dummy", "001001",

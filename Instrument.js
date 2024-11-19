@@ -3,7 +3,8 @@ class Instrument extends Samplers {
 	constructor(samplers) {
 		super(samplers._gmname, samplers._name, samplers._baseSamples, samplers._urls, samplers._volume);
 		this.sampler = new Tone.Sampler({urls: this._urls, baseUrl: gitUrl});
-		this.pan = new Tone.Panner3D(0,0,0);
+		this.pan = new Tone.Panner();
+		this.pan.channelCount = 2;
 		this.vol = new Tone.Volume(this._volume);
 		this.sampler.connect(this.pan);
 		this.pan.connect(this.vol);
@@ -27,7 +28,7 @@ class Instrument extends Samplers {
 */
 class InstrumentComponents {
 	constructor() {
-		this.tmp_event = [];
+		//this.tmp_event = [];
 	}
 	
 	insttypSelected(main, value) {
@@ -51,6 +52,16 @@ class InstrumentComponents {
 		}
 	}
 	
+	octaveUp(main) {
+		if (tmp_octave != 8) tmp_octave++;
+		main.txt_instnote.text = items_note[main.sld_instnote.value] + tmp_octave;
+	}
+	
+	octaveDown(main) {
+		if (tmp_octave != 0) tmp_octave--;
+		main.txt_instnote.text = items_note[main.sld_instnote.value] + tmp_octave;
+	}
+	
 	load(main) {
 		if (tmp_instrument != null && tmp_instrument._name == main.txt_instname.text) return 0;
 		else if (tmp_instrument != null && tmp_instrument._baseSamples == samplers[tmp_samplersid[main.sld_instname.value]]._baseSamples) {
@@ -69,32 +80,36 @@ class InstrumentComponents {
 			main.btn_instload.disabled = false;
 			main.btn_instplay.disabled = false;
 			main.btn_inststop.disabled = false;
-			/*
-			tmp_instrument.sampler.triggerAttackRelease(["C2","C3","E4","G4","B4"], 14)
-			*/
 		});
 	}
 	
 	play(main) {
+		tmp_instrument.sampler.triggerAttack(main.txt_instnote.text);
+	/*
 		this.tmp_event.length = 0;
 		this.tmp_event.push(new Tone.ToneEvent( (time) => {
-			tmp_instrument.sampler.triggerAttack(["C2","C3","E4","G4","B4"]);
+			tmp_instrument.sampler.triggerAttack(["C2","C3","E4","G4","B4"], time);
 		}));
 		this.tmp_event.push(new Tone.ToneEvent( (time) => {
-			tmp_instrument.sampler.triggerRelease(["C2","C3","E4","G4","B4"]);
+			tmp_instrument.sampler.triggerRelease(["C2","C3","E4","G4","B4"], time+4);
 		}));
 		Tone.Transport.schedule((time) => {
-			this.tmp_event[0].start();
-			this.tmp_event[1].start(5);
+			for (var i=0; i<this.tmp_event.length; i++) {
+				this.tmp_event[i].start();
+			}
 		});
 		Tone.Transport.start();
+	*/
 	}
 	
 	stop(main) {
+		tmp_instrument.sampler.releaseAll();
+	/*
 		Tone.Transport.stop();
 		this.tmp_event[0].dispose();
 		this.tmp_event[1].dispose();
-		tmp_instrument.sampler.triggerRelease(["C2","C3","E4","G4","B4"]);
+		tmp_instrument.sampler.releaseAll(0);
+	*/
 	}
 	
 	detuneChanged(main, value) {

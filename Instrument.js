@@ -1,7 +1,7 @@
 
 class Instrument extends Samplers {
 	constructor(samplers) {
-		super(samplers._gmname, samplers._name, samplers._baseSamples, samplers._urls, samplers._volume);
+		super(samplers._gmname, samplers._name, samplers._urls, samplers._volume);
 		this.sampler = new Tone.Sampler({urls: this._urls, baseUrl: gitUrl});
 		this.pan = new Tone.Panner();
 		this.pan.channelCount = 2;
@@ -17,9 +17,6 @@ class Instrument extends Samplers {
 		this.vol.dispose();
 	}
 	
-	changeAllAttributes() {
-		app.ShowPopup("no changes");
-	}
 }
 
 
@@ -32,11 +29,13 @@ class InstrumentComponents {
 	}
 	
 	insttypSelected(main, value) {
+		tmp_samplersid.length = 0;
 		if (items_instname.length != 0) items_instname.length = 0;
 		for (var i=0; i<samplers.length; i++) {
-			if (samplers[i]._gmname == main.txt_insttyp.text)
+			if (samplers[i]._gmname == main.txt_insttyp.text) {
 				items_instname.push(samplers[i]._name);
 				tmp_samplersid.push(i);
+			}
 		}
 		if (items_instname.length != 0) {
 			main.sld_instname.maxValue = items_instname.length-1;
@@ -64,10 +63,6 @@ class InstrumentComponents {
 	
 	load(main) {
 		if (tmp_instrument != null && tmp_instrument._name == main.txt_instname.text) return 0;
-		else if (tmp_instrument != null && tmp_instrument._baseSamples == samplers[tmp_samplersid[main.sld_instname.value]]._baseSamples) {
-			tmp_instrument.changeAllAttributes();
-			return 0;
-		}
 		else if (tmp_instrument != null) {
 			tmp_instrument.dispose();
 			tmp_instrument = null;
@@ -76,10 +71,13 @@ class InstrumentComponents {
 		main.btn_instplay.disabled = true;
 		main.btn_inststop.disabled = true;
 		tmp_instrument = new Instrument(samplers[tmp_samplersid[main.sld_instname.value]]);
+		main.sld_instvol.value = tmp_instrument.vol.volume.value;
+		main.txt_instvol.text = Math.round(tmp_instrument.vol.volume.value);
 		Tone.ToneAudioBuffer.loaded().then( () => {
 			main.btn_instload.disabled = false;
 			main.btn_instplay.disabled = false;
 			main.btn_inststop.disabled = false;
+			sampleLoaded = true;
 		});
 	}
 	
@@ -120,17 +118,16 @@ class InstrumentComponents {
 		}
 	}
 	
-	volumeChanged(main, value) {
-		main.txt_instvol.text = value;
+	volumeSelected(value) {
 		if (sampleLoaded) {
-			tmp_vol.set({volume: value});
+			tmp_instrument.vol.volume.value = value;
 		}
 	}
 	
 	panningChanged(main, value) {
 		main.txt_instpan.text = value;
 		if (sampleLoaded) {
-			tmp_pan.set({pan: value});
+			tmp_instrument.pan.set({pan: value});
 		}
 	}
 	

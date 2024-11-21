@@ -2,16 +2,17 @@
 var sampleUrls = [];
 
 class Samplers {
-	constructor(gmname, name, baseSamples, urls, volume) {
+	constructor(gmname, name, urls, volume) {
 		this._gmname = gmname;
 		this._name = name;
-		this._baseSamples = baseSamples;
 		this._urls = urls;
 		this._volume = volume;
 	}
 }
 
-sampleUrls[0] = {
+samplers.push(new Samplers(
+	"Acoustic Piano", "Grand Piano",
+	{
 	C1 : "001/00100100.ogg",
 	Eb1: "001/00100101.ogg",
 	Gb1: "001/00100102.ogg",
@@ -41,17 +42,12 @@ sampleUrls[0] = {
 	Gb7: "001/00100126.ogg",
 	A7 : "001/00100127.ogg",
 	C8 : "001/00100128.ogg",
-	};
-samplers.push(new Samplers(
-	"Acoustic Piano", "Grand Piano", "001001",
-	sampleUrls[0], -1
-));
-samplers.push(new Samplers(
-	"Acoustic Piano", "Grand Piano Dummy", "001001",
-	sampleUrls[0], -6
+	}, -1
 ));
 
-sampleUrls[1] = {
+samplers.push(new Samplers(
+	"Acoustic Piano", "Steinway Piano",
+	{
 	C1 : "001/00100200.ogg",
 	Eb1: "001/00100201.ogg",
 	Gb1: "001/00100202.ogg",
@@ -81,8 +77,28 @@ sampleUrls[1] = {
 	Gb7: "001/00100226.ogg",
 	A7 : "001/00100227.ogg",
 	C8 : "001/00100228.ogg",
-	};
-samplers.push(new Samplers(
-	"Acoustic Piano", "Steinway Piano", "001002",
-	sampleUrls[1], -6
+	}, -6
 ));
+
+sampleUrls[2] = 
+	samplers.push(new Samplers(
+	"Electric Bass", "Dub Bass",
+	{
+	C1 : "001/03400100.ogg",
+	Eb1: "001/03400101.ogg",
+	Gb1: "001/03400102.ogg",
+	A1 : "001/03400103.ogg",
+	C2 : "001/03400104.ogg",
+	Eb2: "001/03400105.ogg",
+	Gb2: "001/03400106.ogg",
+	A2 : "001/03400107.ogg",
+	C3 : "001/03400108.ogg",
+	Eb3: "001/03400109.ogg",
+	Gb3: "001/03400110.ogg",
+	A3 : "001/03400111.ogg",
+	C4 : "001/03400112.ogg",
+	}, -3
+));
+
+
+

@@ -84,9 +84,11 @@ class Main extends App {
 		this.lay_inst.setChildMargins(0, 0, 0, 0.01);
 		
 		this.lay_instid = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt0_instid = ui.addText(this.lay_instid, "Instrument Index: ", "Center", 0.4, -1);
-		this.txt_instid = ui.addText(this.lay_instid, "1", "Center", 0.1, -1);
-		this.sld_instid = ui.addSlider(this.lay_instid, 1,  "Primary", 0.5, -1);
+		this.txt0_instid = ui.addText(this.lay_instid, "Instrument Index: ", "Left", 0.35, -1);
+		this.txt0_instid.setPadding(0.02, 0.01, 0, 0);
+		this.txt_instid = ui.addText(this.lay_instid, "1", "Left", 0.05, -1);
+		this.txt_instid.setPadding(0, 0.01, 0, 0);
+		this.sld_instid = ui.addSlider(this.lay_instid, 1,  "Primary", 0.6, -1);
 		this.sld_instid.setPadding(0, 0, 0.03, 0);
 		this.sld_instid.step = 1;
 		this.sld_instid.minValue = 1;
@@ -95,10 +97,11 @@ class Main extends App {
 		this.sld_instid.setOnSelect(this.instidOnSelect);
 		
 		this.lay_insttyp = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt0_insttyp = ui.addText(this.lay_insttyp, "Type: ", "Center", 0.1, -1);
-		this.txt_insttyp = ui.addText(this.lay_insttyp, "Acoustic Piano", "Center", 0.4, -1);
-		this.sld_insttyp = ui.addSlider(this.lay_insttyp, 0,  "Primary", 0.5, -1);
-		this.sld_insttyp.setPadding(0, 0, 0.03, 0);
+		this.txt0_insttyp = ui.addText(this.lay_insttyp, "Type: ", "Left", 0.15, -1);
+		this.txt0_insttyp.setPadding(0.02, 0, 0, 0);
+		this.txt_insttyp = ui.addText(this.lay_insttyp, "Acoustic Piano", "Left", 0.85, -1);
+		this.sld_insttyp = ui.addSlider(this.lay_inst, 0,  "Primary", 1, -1);
+		this.sld_insttyp.setPadding(0.02, 0, 0.03, 0);
 		this.sld_insttyp.step = 1;
 		this.sld_insttyp.marks = false;
 		this.sld_insttyp.minValue = 0;
@@ -107,10 +110,11 @@ class Main extends App {
 		this.sld_insttyp.setOnSelect(this.insttypOnSelect);
 		
 		this.lay_instname = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt0_instname = ui.addText(this.lay_instname, "Name: ", "Center", 0.12, -1);
-		this.txt_instname = ui.addText(this.lay_instname, "", "Center", 0.38, -1);
-		this.sld_instname = ui.addSlider(this.lay_instname, 0,  "Primary", 0.5, -1);
-		this.sld_instname.setPadding(0, 0, 0.03, 0);
+		this.txt0_instname = ui.addText(this.lay_instname, "Name: ", "Left", 0.15, -1);
+		this.txt0_instname.setPadding(0.02, 0, 0, 0);
+		this.txt_instname = ui.addText(this.lay_instname, "", "Left", 0.85, -1);
+		this.sld_instname = ui.addSlider(this.lay_inst, 0,  "Primary", 1, -1);
+		this.sld_instname.setPadding(0.02, 0, 0.03, 0);
 		this.sld_instname.step = 1;
 		this.sld_instname.marks = false;
 		this.sld_instname.minValue = 0;
@@ -152,15 +156,29 @@ class Main extends App {
 		this.btn_inststop.icon = "stop";
 		this.inst.insttypSelected(this, 0);
 		
-		/*
-		this.lay_instname = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt_instname = ui.addText(this.lay_instname, "Instrument Name: ", "Center, Singleline", 0.5, -1);
-		this.sel_instname = ui.addSelect(this.lay_instname, items_instname,  "Center, Outlined, Small",  0.5, -1);
-		this.sel_instname.backColor = "#a1acbf";
-		this.sel_instname.textColor = "#000000";
-		this.sel_instname.setOnOpen(this.instnameOnOpen);
-		this.sel_instname.setOnChange(this.instnameOnChange);
+		this.lay_instvol = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
+		this.txt0_instvol = ui.addText(this.lay_instvol, "Volume: ", "Center, Singleline", 0.25, -1);
+		this.txt_instvol = ui.addText(this.lay_instvol, "0", "Center, Singleline", 0.25, -1);
+		this.sld_instvol = ui.addSlider(this.lay_instvol, 0, "Primary", 0.5, -1);
+		this.sld_instvol.setPadding(0, 0, 0.03, 0);
+		this.sld_instvol.step = 1;
+		this.sld_instvol.minValue = -50;
+		this.sld_instvol.maxValue = 6;
+		this.sld_instvol.setOnChange(this.instvolOnChange);
+		this.sld_instvol.setOnSelect(this.instvolOnSelect);
 		
+		this.lay_instpan = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
+		this.txt0_instpan = ui.addText(this.lay_instpan, "Panning: ", "Center, Singleline", 0.25, -1);
+		this.txt_instpan = ui.addText(this.lay_instpan, "0", "Center, Singleline", 0.25, -1);
+		this.sld_instpan = ui.addSlider(this.lay_instpan, 0, "Primary", 0.5, -1);
+		this.sld_instpan.setPadding(0, 0, 0.03, 0);
+		this.sld_instpan.step = 0.02;
+		this.sld_instpan.minValue = -1;
+		this.sld_instpan.maxValue = 1;
+		this.sld_instpan.setOnChange(this.instpanOnChange);
+		this.sld_instpan.setOnSelect(this.instpanOnSelect);
+		
+		/*
 		this.lay_instdtune = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
 		this.txt0_instdtune = ui.addText(this.lay_instdtune, "Detune: ", "Center, Singleline", 0.25, -1);
 		this.txt_instdtune = ui.addText(this.lay_instdtune, "0", "Center, Singleline", 0.25, -1);
@@ -170,24 +188,6 @@ class Main extends App {
 		this.sld_instdtune.maxValue = 1200;
 		this.sld_instdtune.setOnChange(this.instdtuneOnChange);
 		
-		this.lay_instvol = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt0_instvol = ui.addText(this.lay_instvol, "Volume: ", "Center, Singleline", 0.25, -1);
-		this.txt_instvol = ui.addText(this.lay_instvol, "-10", "Center, Singleline", 0.25, -1);
-		this.sld_instvol = ui.addSlider(this.lay_instvol, 0, "Primary", 0.5, -1);
-		this.sld_instvol.step = 1;
-		this.sld_instvol.minValue = -50;
-		this.sld_instvol.maxValue = 6;
-		this.sld_instvol.value = -10;
-		this.sld_instvol.setOnChange(this.instvolOnChange);
-		
-		this.lay_instpan = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt0_instpan = ui.addText(this.lay_instpan, "Panning: ", "Center, Singleline", 0.25, -1);
-		this.txt_instpan = ui.addText(this.lay_instpan, "0", "Center, Singleline", 0.25, -1);
-		this.sld_instpan = ui.addSlider(this.lay_instpan, 0, "Primary", 0.5, -1);
-		this.sld_instpan.step = 0.02;
-		this.sld_instpan.minValue = -1;
-		this.sld_instpan.maxValue = 1;
-		this.sld_instpan.setOnChange(this.instpanOnChange);
 		
 		this.lay_instftyp = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
 		this.txt_instftyp = ui.addText(this.lay_instftyp, "Filter Type: ", "Center, Singleline", 0.5, -1);
@@ -298,18 +298,23 @@ class Main extends App {
 		this.inst.stop(this);
 	}
 	
-	instdtuneOnChange(value) {
-		this.inst.detuneChanged(this, value);
+	instvolOnChange(value) {
+		this.txt_instvol.text = value;
 	}
 	
-	instvolOnChange(value) {
-		this.inst.volumeChanged(this, value);
+	instvolOnSelect(value) {
+		this.inst.volumeSelected(value);
 	}
 	
 	instpanOnChange(value) {
+		this.txt_instpan.text = value;
+	}
+	
+	instpanOnSelect(value) {
 		this.inst.panningChanged(this, value);
 	}
 	
+	/*
 	instftypOnChange(item, index) {
 		this.inst.ftypeChanged(item);
 	}
@@ -325,6 +330,6 @@ class Main extends App {
 	instqOnChange(value) {
 		this.inst.qChanged(this, value);
 	}
-	
+	*/
 	
 }

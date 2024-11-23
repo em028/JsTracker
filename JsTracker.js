@@ -7,7 +7,6 @@ cfg.Light;
 app.Script("Libs/Tone.js");
 app.Script("Global.js");
 app.Script("Loops.js");
-app.Script("LoopsData.js");
 app.Script("Sample.js");
 app.Script("Samplers.js");
 app.Script("Instrument.js");
@@ -19,7 +18,7 @@ class Main extends App {
 	
 	onStart() {
 		
-		//ui.setFontFile("fonts/PixelMplus12-Regular.ttf");
+		//ui.setFontFile("fonts/MaterialIcons-Regular.ttf");
 		
 		this.daw = new DAW();
 		this.daw.initDAW();
@@ -47,7 +46,8 @@ class Main extends App {
 		});
 		*/
 		
-		this.main = ui.addLayout("main", "Linear", "Vertical", 1.0 ,1.0);
+		
+		this.main = ui.addLayout("main", "Linear", "Vertical", 1, 1);
 		
 		this.tabs = ui.addTabs(this.main, items_tab, "Scrollable", 1, 1);
 		this.tabs.backColor = "#696969";
@@ -59,6 +59,22 @@ class Main extends App {
 		this.tab_fx = this.tabs.getLayout(6);
 		
 		/*
+			Bottom Navigation Bar Layout
+		*/
+		this.bnb = ui.addBottomNavbar(this.main, navs, "", 1, 0.07);
+		this.bnb.backColor = "#aaccee";
+		this.bnb.textColor = "#222222";
+		this.bnb.selectItem("stop");
+		this.bnb.setOnChange(this.bnbOnChange);
+		
+		/*
+			Drawer Layout
+		*/
+		this.drw_lay = ui.addLayout(null, "Linear");
+		this.drw = ui.addDrawer(this.drw_lay, "Bottom", 0.8);
+		this.drw.setOnClose(this.drwOnClose);
+		
+		/*
 			Tab Master Layout
 		*/
 		this.lay_mast =  ui.addLayout(this.tab_mast, "Linear", "Vertical", 1.0, 1.0);
@@ -67,12 +83,19 @@ class Main extends App {
 		this.lay_mast.setChildMargins(0.01, 0.01, 0, 0.01);
 		
 		this.lay_mastbpm = ui.addLayout(this.lay_mast, "Linear", "Horizontal", 1.0, -1);
-		this.txt_mastbpm = ui.addText(this.lay_mastbpm, "BPM: ", "Center, Singleline", 0.5, -1);
-		this.tfd_mastbpm = ui.addTextField(this.lay_mastbpm, "",  "Center, Number", 0.5, -1);
-		this.tfd_mastbpm.textColor = "#fffff0";
-		this.tfd_mastbpm.text = "130";
-		this.tfd_mastbpm.setOnEnter(this.mastbpmOnEnter);
-		Tone.Transport.bpm.value = this.tfd_mastbpm.text;
+		this.txt0_mastbpm = ui.addText(this.lay_mastbpm, "BPM: ", "Left", 0.2, -1);
+		this.txt0_mastbpm.setPadding(0.02, 0.01, 0, 0);
+		this.txt_mastbpm = ui.addText(this.lay_mastbpm, "120",  "Left", 0.8, -1);
+		this.txt_mastbpm.setPadding(0.02, 0.01, 0, 0);
+		this.sld_mastbpm = ui.addSlider(this.lay_mast, 0,  "Primary", 1, -1);
+		this.sld_mastbpm.setPadding(0.02, 0, 0.03, 0);
+		this.sld_mastbpm.step = 5;
+		this.sld_mastbpm.minValue = 60;
+		this.sld_mastbpm.maxValue = 210;
+		this.sld_mastbpm.value = 120;
+		this.sld_mastbpm.setOnChange(this.mastbpmOnChange);
+		this.sld_mastbpm.setOnSelect(this.mastbpmOnSelect);
+		Tone.Transport.bpm.value = this.txt_mastbpm.text;
 		
 		/*
 			Tab Instrument Layout
@@ -87,8 +110,8 @@ class Main extends App {
 		this.txt0_instid.setPadding(0.02, 0.01, 0, 0);
 		this.txt_instid = ui.addText(this.lay_instid, "1", "Left", 0.05, -1);
 		this.txt_instid.setPadding(0, 0.01, 0, 0);
-		this.sld_instid = ui.addSlider(this.lay_instid, 1,  "Primary", 0.6, -1);
-		this.sld_instid.setPadding(0, 0, 0.03, 0);
+		this.sld_instid = ui.addSlider(this.lay_inst, 1,  "Primary", 1, -1);
+		this.sld_instid.setPadding(0.02, 0, 0.03, 0);
 		this.sld_instid.step = 1;
 		this.sld_instid.minValue = 1;
 		this.sld_instid.maxValue = 36;
@@ -238,15 +261,26 @@ class Main extends App {
 		this.tab_fxlist.textSize = 10;
 		*/
 		
-		
+	}
+	/*
+		BottomNavigation Bar Layout Controller
+	*/
+	bnbOnChange(item, index) {
+		if (index == 2) this.drw.show();
 	}
 	
-	
+	drwOnClose() {
+		this.bnb.selectItemByIndex(1);
+	}
 	
 	/*
 		Tab Master Layout Controller
 	*/
-	mastbpmOnEnter() {
+	mastbpmOnChange(item) {
+		this.txt_mastbpm.text = item;
+	}
+	
+	mastbpmOnSelect() {
 		this.daw.mastbpmChanged(this);
 	}
 	

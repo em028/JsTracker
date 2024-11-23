@@ -1,8 +1,7 @@
 
 var i;
 
-//var baseUrl = "http://192.168.128.123:8080/";
-var baseUrl = "http://127.0.0.1:8080/";
+//var gitUrl = "http://127.0.0.1:8080/";
 var gitUrl = "https://em028.github.io/samples/";
 
 var daw;
@@ -16,6 +15,7 @@ var pattern = [];
 var items_pat = [];
 var items_patbar = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
+var navs = [["play", "play_circle_outline"], ["stop", "stop"], ["mini piano", "keyboard"]];
 //var items_on_off = ["on","off"];	
 //var items_key = ["C","Cm","C#","C#m","D","Dm","D#","D#m","E","Em","F","Fm","F#","F#m","G","Gm","G#","G#m","A","Am","A#","A#m","B","Bm"];
 var items_tab = ["Master", "Sequencer", "Patterns", "Instruments", "Drum Machine", "Loops", "Effectors"];
@@ -32,17 +32,10 @@ var items_instloopid = [];
 var items_instsmpl = [];
 
 var tmp_octave = 4;
-var tmp_sampler = null;
-var tmp_instrument = null;
 var tmp_samplersid = [];
 var tmp_sched = null;
 var tmp_loopid = 0;
 var tmp_smplid = 0;
 var tmp_samples = [];
-var tmp_filter = null;
-var tmp_vol = null;
-var tmp_pan = null;
-var tmp_lfo1 = null;
-var tmp_lfo2 = null;
 
 var sampleLoaded = false;

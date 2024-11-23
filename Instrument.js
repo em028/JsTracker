@@ -75,7 +75,6 @@ class InstrumentComponents {
 		main.sld_instvol.value = instruments[i].vol.volume.value;
 		main.txt_instvol.text = Math.round(instruments[i].vol.volume.value);
 		Tone.ToneAudioBuffer.loaded().then( () => {
-			main.btn_instload.disabled = false;
 			main.btn_instplay.disabled = false;
 			main.btn_inststop.disabled = false;
 			sampleLoaded = true;

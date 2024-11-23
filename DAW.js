@@ -31,12 +31,7 @@ class DAW {
 	}
 	
 	mastbpmChanged(main) {
-		if (sampleLoaded) {
-			for (var i=0; i<tmp_samples.length; i++) {
-				tmp_samples[i].playbackRate = main.tfd_mastbpm.text/loops[tmp_loopid]._bpm;
-			}
-		}
-		Tone.Transport.bpm.value = main.tfd_mastbpm.text;
+		
 	}
 	
 	instPreviewReset(main) {

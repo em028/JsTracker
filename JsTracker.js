@@ -1,9 +1,9 @@
-
+/*
 cfg.MUI;
-//cfg.Landscape;
 cfg.Portrait;
+cfg.Landscape;
 cfg.Light;
-
+*/
 app.Script("Libs/Tone.js");
 app.Script("Global.js");
 app.Script("Loops.js");
@@ -18,7 +18,6 @@ app.Script("DAW.js");
 class Main extends App {
 	
 	onStart() {
-		
 		
 		//ui.setFontFile("fonts/PixelMplus12-Regular.ttf");
 		
@@ -92,7 +91,7 @@ class Main extends App {
 		this.sld_instid.setPadding(0, 0, 0.03, 0);
 		this.sld_instid.step = 1;
 		this.sld_instid.minValue = 1;
-		this.sld_instid.maxValue = 32;
+		this.sld_instid.maxValue = 36;
 		this.sld_instid.setOnChange(this.instidOnChange);
 		this.sld_instid.setOnSelect(this.instidOnSelect);
 		
@@ -124,17 +123,17 @@ class Main extends App {
 		this.sld_instname.setOnSelect(this.instnameOnSelect);
 		
 		this.lay_instnote = ui.addLayout(this.lay_inst, "Linear", "Horizontal, FillX", 1.0, -1);
-		this.btn_instnotel = ui.addButton(this.lay_instnote, "", " Small", 0.15, -1);
+		this.btn_instnotel = ui.addButton(this.lay_instnote, "", " Small", 0.3, -1);
 		this.btn_instnotel.setOnTouch(this.instnotelOnTouch);
 		this.btn_instnotel.icon = "arrow_left";
 		this.btn_instnotel.backColor = "#aaaabf";
-		this.btn_instnoter = ui.addButton(this.lay_instnote, "", " Small", 0.15, -1);
+		this.txt_instnote = ui.addText(this.lay_instnote, "C4", "Center", 0.4, -1);
+		this.btn_instnoter = ui.addButton(this.lay_instnote, "", " Small", 0.3, -1);
 		this.btn_instnoter.setOnTouch(this.instnoterOnTouch);
 		this.btn_instnoter.icon = "arrow_right";
 		this.btn_instnoter.backColor = "#aaaabf";
-		this.txt_instnote = ui.addText(this.lay_instnote, "C4", "Center", 0.2, -1);
-		this.sld_instnote = ui.addSlider(this.lay_instnote, 0,  "Primary", 0.5, -1);
-		this.sld_instnote.setPadding(0, 0, 0.03, 0);
+		this.sld_instnote = ui.addSlider(this.lay_inst, 0,  "Primary", 1, -1);
+		this.sld_instnote.setPadding(0.02, 0, 0.03, 0);
 		this.sld_instnote.step = 1;
 		this.sld_instnote.marks = true;
 		this.sld_instnote.minValue = 0;
@@ -232,12 +231,12 @@ class Main extends App {
 		this.lay_fx.backColor = "#687074";
 		this.lay_fx.textColor = "#fffff0";
 		this.lay_fx.setChildMargins(0.01, 0.01, 0, 0.01);
-		
+		/*
 		this.tab_fxlist = ui.addTabs(this.lay_fx, items_fxlist, "Scrollable", 1, 1);
 		this.tab_fxlist.backColor = "#696999";
 		this.tab_fxlist.textColor = "#ffffff";
 		this.tab_fxlist.textSize = 10;
-		
+		*/
 		
 		
 	}

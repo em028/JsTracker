@@ -10,7 +10,7 @@ var daw;
 var loops = [];
 var samples = [];
 var samplers = [];
-var instruments = [];
+var instruments = Array(36);
 var pattern = [];
 
 var items_pat = [];

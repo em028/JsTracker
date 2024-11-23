@@ -25,7 +25,7 @@ class Instrument extends Samplers {
 */
 class InstrumentComponents {
 	constructor() {
-		//this.tmp_event = [];
+		instruments.fill(null);
 	}
 	
 	insttypSelected(main, value) {
@@ -62,17 +62,18 @@ class InstrumentComponents {
 	}
 	
 	load(main) {
-		if (tmp_instrument != null && tmp_instrument._name == main.txt_instname.text) return 0;
-		else if (tmp_instrument != null) {
-			tmp_instrument.dispose();
-			tmp_instrument = null;
+		var i = main.sld_instid.value-1;
+		if (instruments[i] != null && instruments[i]._name == main.txt_instname.text) return 0;
+		else if (instruments[i] != null) {
+			instruments[i].dispose();
+			instruments[i] = null;
 		}
 		main.btn_instload.disabled = true;
 		main.btn_instplay.disabled = true;
 		main.btn_inststop.disabled = true;
-		tmp_instrument = new Instrument(samplers[tmp_samplersid[main.sld_instname.value]]);
-		main.sld_instvol.value = tmp_instrument.vol.volume.value;
-		main.txt_instvol.text = Math.round(tmp_instrument.vol.volume.value);
+		instruments[i] = new Instrument(samplers[tmp_samplersid[main.sld_instname.value]]);
+		main.sld_instvol.value = instruments[i].vol.volume.value;
+		main.txt_instvol.text = Math.round(instruments[i].vol.volume.value);
 		Tone.ToneAudioBuffer.loaded().then( () => {
 			main.btn_instload.disabled = false;
 			main.btn_instplay.disabled = false;
@@ -82,7 +83,7 @@ class InstrumentComponents {
 	}
 	
 	play(main) {
-		tmp_instrument.sampler.triggerAttack(main.txt_instnote.text);
+		instruments[main.sld_instid.value-1].sampler.triggerAttack(main.txt_instnote.text);
 	/*
 		this.tmp_event.length = 0;
 		this.tmp_event.push(new Tone.ToneEvent( (time) => {
@@ -101,7 +102,7 @@ class InstrumentComponents {
 	}
 	
 	stop(main) {
-		tmp_instrument.sampler.releaseAll();
+		instruments[main.sld_instid.value-1].sampler.releaseAll();
 	/*
 		Tone.Transport.stop();
 		this.tmp_event[0].dispose();

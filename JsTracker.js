@@ -72,11 +72,19 @@ class Main extends App {
 		*/
 		this.lay_drw = ui.addLayout(null, "Linear");
 		this.drw = ui.addDrawer(this.lay_drw, "Bottom", 0.6);
-		this.img_piano1 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.25);
+		this.lay_pfctrl = ui.addLayout(this.lay_drw, "Linear", "Horizontal", 1, 0.08);
+		this.lay_pfctrl.backColor = "#687074";
+		this.lay_pfctrl.textColor = "#fffff0";
+		this.swt_pfctrl = ui.addSwitch(this.lay_pfctrl, "sustine", "Primary, Small, Center", 0.5, 1);
+		this.swt_pfctrl.textColor = "#fffff0";
+		this.btn_pfctrl = ui.addButton(this.lay_pfctrl, "note off", "VCenter", -1, -1);
+		this.btn_pfctrl.icon = "music_off";
+		this.btn_pfctrl.disabled = true;
+		this.img_piano1 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.23);
 		this.img_piano1.setOnTouch(this.piano1OnTouch);
-		this.img_piano2 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.25);
-		this.img_piano3 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.25);
-		this.img_piano4 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.25);
+		this.img_piano2 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.23);
+		this.img_piano3 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.23);
+		this.img_piano4 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.23);
 		this.drw.setOnClose(this.drwOnClose);
 		
 		/*

@@ -80,7 +80,7 @@ class Main extends App {
 		this.swt_pfctrl.textColor = "#fffff0";
 		this.btn_pfctrl = ui.addButton(this.lay_pfctrl, "note off", "VCenter", -1, -1);
 		this.btn_pfctrl.icon = "music_off";
-		this.btn_pfctrl.disabled = true;
+		this.btn_pfctrl.setOnTouch(this.noteoffOnTouch);
 		this.img_piano1 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, PIANO_HEIGHT);
 		this.img_piano1.setOnTouch(this.pianoOnTouch);
 		this.img_piano2 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, PIANO_HEIGHT);
@@ -288,11 +288,15 @@ class Main extends App {
 	}
 	
 	drwOnClose() {
-		this.bnb.selectItemByIndex(1);
+		this.bnb.selectItemByIndex(1); this.piano.releaseAll();
 	}
 	
 	pianoOnTouch(event) {
-		this.piano.onTouch(event.left, event.top);
+		this.piano.onTouch(this, event.left, event.top);
+	}
+	
+	noteoffOnTouch() {
+		this.piano.releaseAll();
 	}
 	
 	/*

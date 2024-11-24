@@ -12,6 +12,7 @@ class MiniPiano {
 		this.partition_y = 0;
 		this.partition_w = 0;
 		this.partition_b = 0;
+		this.octave = 0;
 		this.black = false;
 	}
 	
@@ -26,8 +27,6 @@ class MiniPiano {
 		this.partition_y = this.height*0.25;
 		this.partition_w = this.partition_x/7;
 		this.partition_b = this.partition_x/12;
-		this.black = false;
-		this.octave = 0;
 	}
 	
 	onTouch(main, x, y) {

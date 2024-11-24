@@ -70,8 +70,13 @@ class Main extends App {
 		/*
 			Drawer Layout
 		*/
-		this.drw_lay = ui.addLayout(null, "Linear");
-		this.drw = ui.addDrawer(this.drw_lay, "Bottom", 0.8);
+		this.lay_drw = ui.addLayout(null, "Linear");
+		this.drw = ui.addDrawer(this.lay_drw, "Bottom", 0.6);
+		this.img_piano1 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.25);
+		this.img_piano1.setOnTouch(this.piano1OnTouch);
+		this.img_piano2 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.25);
+		this.img_piano3 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.25);
+		this.img_piano4 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.25);
 		this.drw.setOnClose(this.drwOnClose);
 		
 		/*
@@ -271,6 +276,11 @@ class Main extends App {
 	
 	drwOnClose() {
 		this.bnb.selectItemByIndex(1);
+	}
+	
+	piano1OnTouch(event) {
+		//app.ShowPopup(this.img_piano1.getPosition("px").bottom);
+		ui.showPopup(event);
 	}
 	
 	/*

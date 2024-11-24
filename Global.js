@@ -5,6 +5,9 @@ var i;
 var gitUrl = "https://em028.github.io/samples/";
 
 var daw;
+var DRAWER_HEIGHT = 0.6;
+var PFCTRL_HEIGHT = 0.08;
+var PIANO_HEIGHT = 0.23;
 
 var loops = [];
 var samples = [];

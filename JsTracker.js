@@ -10,7 +10,7 @@ app.Script("Loops.js");
 app.Script("Sample.js");
 app.Script("Samplers.js");
 app.Script("Instrument.js");
-app.Script("LFOs.js");
+app.Script("MiniPiano.js");
 app.Script("Pattern.js");
 app.Script("DAW.js");
 
@@ -23,6 +23,7 @@ class Main extends App {
 		this.daw = new DAW();
 		this.daw.initDAW();
 		this.inst = new InstrumentComponents();
+		this.piano = new MiniPiano();
 		
 		/*
 		
@@ -71,8 +72,8 @@ class Main extends App {
 			Drawer Layout
 		*/
 		this.lay_drw = ui.addLayout(null, "Linear");
-		this.drw = ui.addDrawer(this.lay_drw, "Bottom", 0.6);
-		this.lay_pfctrl = ui.addLayout(this.lay_drw, "Linear", "Horizontal", 1, 0.08);
+		this.drw = ui.addDrawer(this.lay_drw, "Bottom", DRAWER_HEIGHT);
+		this.lay_pfctrl = ui.addLayout(this.lay_drw, "Linear", "Horizontal", 1, PFCTRL_HEIGHT);
 		this.lay_pfctrl.backColor = "#687074";
 		this.lay_pfctrl.textColor = "#fffff0";
 		this.swt_pfctrl = ui.addSwitch(this.lay_pfctrl, "sustine", "Primary, Small, Center", 0.5, 1);
@@ -80,11 +81,15 @@ class Main extends App {
 		this.btn_pfctrl = ui.addButton(this.lay_pfctrl, "note off", "VCenter", -1, -1);
 		this.btn_pfctrl.icon = "music_off";
 		this.btn_pfctrl.disabled = true;
-		this.img_piano1 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.23);
-		this.img_piano1.setOnTouch(this.piano1OnTouch);
-		this.img_piano2 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.23);
-		this.img_piano3 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.23);
-		this.img_piano4 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, 0.23);
+		this.img_piano1 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, PIANO_HEIGHT);
+		this.img_piano1.setOnTouch(this.pianoOnTouch);
+		this.img_piano2 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, PIANO_HEIGHT);
+		this.img_piano2.setOnTouch(this.pianoOnTouch);
+		this.img_piano3 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, PIANO_HEIGHT);
+		this.img_piano3.setOnTouch(this.pianoOnTouch);
+		this.img_piano4 = ui.addImage(this.lay_drw, "Img/minipiano.jpg", "Image", 1, PIANO_HEIGHT);
+		this.img_piano4.setOnTouch(this.pianoOnTouch);
+		this.piano.setPianoSize(this.img_piano4.getPosition("px"));
 		this.drw.setOnClose(this.drwOnClose);
 		
 		/*
@@ -286,9 +291,8 @@ class Main extends App {
 		this.bnb.selectItemByIndex(1);
 	}
 	
-	piano1OnTouch(event) {
-		//app.ShowPopup(this.img_piano1.getPosition("px").bottom);
-		ui.showPopup(event);
+	pianoOnTouch(event) {
+		this.piano.onTouch(event.left, event.top);
 	}
 	
 	/*

@@ -1,8 +1,10 @@
 
 class Instrument extends Samplers {
 	constructor(samplers) {
-		super(samplers._gmname, samplers._name, samplers._urls, samplers._volume);
+		super(samplers._gmname, samplers._name, samplers._urls, samplers._volume, samplers._attack, samplers._release);
 		this.sampler = new Tone.Sampler({urls: this._urls, baseUrl: gitUrl});
+		this.sampler.attack = this._attack;
+		this.sampler.release = this._release;
 		this.pan = new Tone.Panner();
 		this.pan.channelCount = 2;
 		this.vol = new Tone.Volume(this._volume);
@@ -51,16 +53,6 @@ class InstrumentComponents {
 		}
 	}
 	
-	octaveUp(main) {
-		if (tmp_octave != 8) tmp_octave++;
-		main.txt_instnote.text = items_note[main.sld_instnote.value] + tmp_octave;
-	}
-	
-	octaveDown(main) {
-		if (tmp_octave != 0) tmp_octave--;
-		main.txt_instnote.text = items_note[main.sld_instnote.value] + tmp_octave;
-	}
-	
 	load(main) {
 		var i = main.sld_instid.value-1;
 		if (instruments[i] != null && instruments[i]._name == main.txt_instname.text) return 0;
@@ -69,15 +61,12 @@ class InstrumentComponents {
 			instruments[i] = null;
 		}
 		main.btn_instload.disabled = true;
-		main.btn_instplay.disabled = true;
-		main.btn_inststop.disabled = true;
 		instruments[i] = new Instrument(samplers[tmp_samplersid[main.sld_instname.value]]);
 		main.sld_instvol.value = instruments[i].vol.volume.value;
 		main.txt_instvol.text = Math.round(instruments[i].vol.volume.value);
 		Tone.ToneAudioBuffer.loaded().then( () => {
-			main.btn_instplay.disabled = false;
-			main.btn_inststop.disabled = false;
 			sampleLoaded = true;
+			main.btn_instload.disabled = false;
 		});
 	}
 	
@@ -110,48 +99,16 @@ class InstrumentComponents {
 	*/
 	}
 	
-	detuneChanged(main, value) {
-		main.txt_instdtune.text = value;
-		if (sampleLoaded) {
-			for (var i=0; i<tmp_samples.length; i++)
-				tmp_samples[i].detune = value;
-		}
-	}
-	
 	volumeSelected(value) {
 		if (sampleLoaded) {
-			tmp_instrument.vol.volume.value = value;
+			instruments[main.sld_instid.value-1].vol.volume.value = value;
 		}
 	}
 	
 	panningChanged(main, value) {
 		main.txt_instpan.text = value;
 		if (sampleLoaded) {
-			tmp_instrument.pan.set({pan: value});
-		}
-	}
-	
-	ftypeChanged(item) {
-		if (tmp_filter != null)
-			tmp_filter.type = item;
-	}
-	
-	rolloffChanged(item) {
-		if (tmp_filter != null)
-			tmp_filter.rolloff = item;
-	}
-	
-	frequencyChanged(main, value) {
-		main.txt_instfq.text = Math.floor(1.25**value);
-		if (tmp_filter != null) {
-				tmp_filter.set({frequency: Math.floor(1.25**value)});
-		}
-	}
-	
-	qChanged(main, value) {
-		main.txt_instq.text = value;
-		if (tmp_filter != null) {
-				tmp_filter.set({Q: value});
+			instruments[main.sld_instid.value-1].pan.set({pan: value});
 		}
 	}
 	

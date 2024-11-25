@@ -2,11 +2,13 @@
 var sampleUrls = [];
 
 class Samplers {
-	constructor(gmname, name, urls, volume) {
+	constructor(gmname, name, urls, volume, attack, release) {
 		this._gmname = gmname;
 		this._name = name;
 		this._urls = urls;
 		this._volume = volume;
+		this._attack = attack;
+		this._release = release;
 	}
 }
 
@@ -42,7 +44,7 @@ samplers.push(new Samplers(
 	Gb7: "001/00100126.ogg",
 	A7 : "001/00100127.ogg",
 	C8 : "001/00100128.ogg",
-	}, -1
+	}, -1, 0, 0.15
 ));
 
 samplers.push(new Samplers(
@@ -77,7 +79,7 @@ samplers.push(new Samplers(
 	Gb7: "001/00100226.ogg",
 	A7 : "001/00100227.ogg",
 	C8 : "001/00100228.ogg",
-	}, -6
+	}, -6, 0, 0.15
 ));
 
 sampleUrls[2] = 
@@ -97,8 +99,6 @@ sampleUrls[2] =
 	Gb3: "001/03400110.ogg",
 	A3 : "001/03400111.ogg",
 	C4 : "001/03400112.ogg",
-	}, -3
+	}, -3, 0, 0.1
 ));
-
-
 

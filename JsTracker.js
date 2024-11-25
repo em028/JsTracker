@@ -54,9 +54,9 @@ class Main extends App {
 		this.tabs.backColor = "#696969";
 		this.tabs.textColor = "#ffffff";
 		this.tab_mast = this.tabs.getLayout(0);
-		this.tab_seq = this.tabs.getLayout(1);
+		this.tab_inst = this.tabs.getLayout(1);
 		this.tab_pat = this.tabs.getLayout(2);
-		this.tab_inst = this.tabs.getLayout(3);
+		this.tab_seq = this.tabs.getLayout(3);
 		this.tab_fx = this.tabs.getLayout(6);
 		
 		/*
@@ -124,9 +124,9 @@ class Main extends App {
 		this.lay_inst.setChildMargins(0, 0, 0, 0.01);
 		
 		this.lay_instid = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt0_instid = ui.addText(this.lay_instid, "Instrument Index: ", "Left", 0.35, -1);
+		this.txt0_instid = ui.addText(this.lay_instid, "Instrument Index: ", "Left", 0.4, -1);
 		this.txt0_instid.setPadding(0.02, 0.01, 0, 0);
-		this.txt_instid = ui.addText(this.lay_instid, "1", "Left", 0.05, -1);
+		this.txt_instid = ui.addText(this.lay_instid, "1", "Left", 0.6, -1);
 		this.txt_instid.setPadding(0, 0.01, 0, 0);
 		this.sld_instid = ui.addSlider(this.lay_inst, 1,  "Primary", 1, -1);
 		this.sld_instid.setPadding(0.02, 0, 0.03, 0);
@@ -163,37 +163,11 @@ class Main extends App {
 		this.sld_instname.setOnChange(this.instnameOnChange);
 		this.sld_instname.setOnSelect(this.instnameOnSelect);
 		
-		this.lay_instnote = ui.addLayout(this.lay_inst, "Linear", "Horizontal, FillX", 1.0, -1);
-		this.btn_instnotel = ui.addButton(this.lay_instnote, "", " Small", 0.3, -1);
-		this.btn_instnotel.setOnTouch(this.instnotelOnTouch);
-		this.btn_instnotel.icon = "arrow_left";
-		this.btn_instnotel.backColor = "#aaaabf";
-		this.txt_instnote = ui.addText(this.lay_instnote, "C4", "Center", 0.4, -1);
-		this.btn_instnoter = ui.addButton(this.lay_instnote, "", " Small", 0.3, -1);
-		this.btn_instnoter.setOnTouch(this.instnoterOnTouch);
-		this.btn_instnoter.icon = "arrow_right";
-		this.btn_instnoter.backColor = "#aaaabf";
-		this.sld_instnote = ui.addSlider(this.lay_inst, 0,  "Primary", 1, -1);
-		this.sld_instnote.setPadding(0.02, 0, 0.03, 0);
-		this.sld_instnote.step = 1;
-		this.sld_instnote.marks = true;
-		this.sld_instnote.minValue = 0;
-		this.sld_instnote.maxValue = 11;
-		this.sld_instnote.setOnChange(this.instnoteOnChange);
-		
 		this.lay_instload = ui.addLayout(this.lay_inst, "Linear", "Horizontal", -1, -1);
 		this.btn_instload = ui.addButton(this.lay_instload, "Load", " Small", -1, -1);
 		this.btn_instload.setOnTouch(this.instloadOnTouch);
 		this.btn_instload.icon = "sync";
 		this.btn_instload.disabled = true;
-		this.btn_instplay = ui.addButton(this.lay_instload, "play", "Small", -1, -1);
-		this.btn_instplay.setOnTouch(this.instplayOnTouch);
-		this.btn_instplay.disabled = true;
-		this.btn_instplay.icon = "play_circle_outline";
-		this.btn_inststop = ui.addButton(this.lay_instload, "stop", "Small", -1, -1);
-		this.btn_inststop.setOnTouch(this.inststopOnTouch);
-		this.btn_inststop.disabled = true;
-		this.btn_inststop.icon = "stop";
 		this.inst.insttypSelected(this, 0);
 		
 		this.lay_instvol = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
@@ -217,53 +191,6 @@ class Main extends App {
 		this.sld_instpan.maxValue = 1;
 		this.sld_instpan.setOnChange(this.instpanOnChange);
 		this.sld_instpan.setOnSelect(this.instpanOnSelect);
-		
-		/*
-		this.lay_instdtune = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt0_instdtune = ui.addText(this.lay_instdtune, "Detune: ", "Center, Singleline", 0.25, -1);
-		this.txt_instdtune = ui.addText(this.lay_instdtune, "0", "Center, Singleline", 0.25, -1);
-		this.sld_instdtune = ui.addSlider(this.lay_instdtune, 0, "Primary", 0.5, -1);
-		this.sld_instdtune.step = 100;
-		this.sld_instdtune.minValue = -1200;
-		this.sld_instdtune.maxValue = 1200;
-		this.sld_instdtune.setOnChange(this.instdtuneOnChange);
-		
-		
-		this.lay_instftyp = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt_instftyp = ui.addText(this.lay_instftyp, "Filter Type: ", "Center, Singleline", 0.5, -1);
-		this.sel_instftyp = ui.addSelect(this.lay_instftyp, items_instftyp,  "Center, Outlined, Small",  0.5, -1);
-		this.sel_instftyp.backColor = "#a1acbf";
-		this.sel_instftyp.textColor = "#000000";
-		this.sel_instftyp.value = "lowpass";
-		this.sel_instftyp.setOnChange(this.instftypOnChange);
-		
-		this.lay_instroff = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt_instroff = ui.addText(this.lay_instroff, "Roll-off: ", "Center, Singleline", 0.5, -1);
-		this.sel_instroff = ui.addSelect(this.lay_instroff, items_instroff,  "Center, Outlined, Small",  0.5, -1);
-		this.sel_instroff.backColor = "#a1acbf";
-		this.sel_instroff.textColor = "#000000";
-		this.sel_instroff.value = "-12";
-		this.sel_instroff.setOnChange(this.instroffOnChange);
-		
-		this.lay_instfq = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt0_instfq = ui.addText(this.lay_instfq, "Frequency: ", "Center, Singleline", 0.25, -1);
-		this.txt_instfq = ui.addText(this.lay_instfq, "22000", "Center, Singleline", 0.25, -1);
-		this.sld_instfq = ui.addSlider(this.lay_instfq, 45, "Primary", 0.5, -1);
-		this.sld_instfq.step = 0.5;
-		this.sld_instfq.minValue = 0;
-		this.sld_instfq.maxValue = 45;
-		this.sld_instfq.setOnChange(this.instfqOnChange);
-		
-		this.lay_instq = ui.addLayout(this.lay_inst, "Linear", "Horizontal", 1.0, -1);
-		this.txt0_instq = ui.addText(this.lay_instq, "Quality of Fq: ", "Center, Singleline", 0.25, -1);
-		this.txt_instq = ui.addText(this.lay_instq, "1", "Center, Singleline", 0.25, -1);
-		this.sld_instq = ui.addSlider(this.lay_instq, 1, "Primary", 0.5, -1);
-		this.sld_instq.step = 1;
-		this.sld_instq.minValue = 1;
-		this.sld_instq.maxValue = 24;
-		this.sld_instq.setOnChange(this.instqOnChange);
-		
-		
 		
 		/*
 		Tab Effector Layout
@@ -333,28 +260,8 @@ class Main extends App {
 		this.txt_instname.text = items_instname[item];
 	}
 	
-	instnotelOnTouch() {
-		this.inst.octaveDown(this);
-	}
-	
-	instnoterOnTouch() {
-		this.inst.octaveUp(this)
-	}
-	
-	instnoteOnChange(item) {
-		this.txt_instnote.text = items_note[item]+tmp_octave;
-	}
-	
 	instloadOnTouch() {
 		this.inst.load(this);
-	}
-	
-	instplayOnTouch() {
-		this.inst.play(this);
-	}
-	
-	inststopOnTouch() {
-		this.inst.stop(this);
 	}
 	
 	instvolOnChange(value) {
@@ -372,23 +279,5 @@ class Main extends App {
 	instpanOnSelect(value) {
 		this.inst.panningChanged(this, value);
 	}
-	
-	/*
-	instftypOnChange(item, index) {
-		this.inst.ftypeChanged(item);
-	}
-	
-	instroffOnChange(item, index) {
-		this.inst.rolloffChanged(item);
-	}
-	
-	instfqOnChange(value) {
-		this.inst.frequencyChanged(this, value);
-	}
-	
-	instqOnChange(value) {
-		this.inst.qChanged(this, value);
-	}
-	*/
 	
 }

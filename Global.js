@@ -21,10 +21,10 @@ var items_patbar = ["1", "2", "3", "4", "5", "6", "7", "8"];
 var navs = [["play", "play_circle_outline"], ["stop", "stop"], ["mini piano", "keyboard"]];
 //var items_on_off = ["on","off"];	
 //var items_key = ["C","Cm","C#","C#m","D","Dm","D#","D#m","E","Em","F","Fm","F#","F#m","G","Gm","G#","G#m","A","Am","A#","A#m","B","Bm"];
-var items_tab = ["Master", "Sequencer", "Patterns", "Instruments", "Drum Machine", "Loops", "Effectors"];
+var items_tab = ["Master", "Instruments", "Patterns", "Sequencer", "Drum Machine", "Loops", "Effectors"];
 var items_lfolist = ["Amplitude LFO", "Detune LFO", "Filter LFO", "Pan LFO"];
 var items_fxlist = ["Auto Filter", "Auto Panner", "Auto Wah", "Bit Crusher", "3D Panner"];
-var items_note = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
+//var items_note = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
 var items_pack = ["All", "BerlinMinimal", "SpeedFreak"];
 var items_genre = ["Drum'n'bass", "Techno"];
 var items_insttyp = ["Acoustic Piano", "Electric Piano", "Electric Bass", "Synth Bass", "Acoustic Guitar", "Electric Guitar", "Strings", "Synth Strings", "Synth Lead", "Synth Pad"];
@@ -34,11 +34,8 @@ var items_instname = [];
 var items_instloopid = [];
 var items_instsmpl = [];
 
-var tmp_octave = 4;
 var tmp_samplersid = [];
 var tmp_sched = null;
 var tmp_loopid = 0;
-var tmp_smplid = 0;
-var tmp_samples = [];
 
 var sampleLoaded = false;

@@ -6,12 +6,10 @@ cfg.Light;
 */
 app.Script("Libs/Tone.js");
 app.Script("Global.js");
-app.Script("Loops.js");
-app.Script("Sample.js");
 app.Script("Samplers.js");
 app.Script("Instrument.js");
+app.Script("Sequence.js");
 app.Script("MiniPiano.js");
-app.Script("Pattern.js");
 app.Script("DAW.js");
 
 class Main extends App {
@@ -24,7 +22,8 @@ class Main extends App {
 		this.daw.initDAW();
 		this.inst = new InstrumentComponents();
 		this.piano = new MiniPiano();
-		
+		this.seqf = new SequenceFunctions();
+		//this.seqf.getSequenceText(null);
 		/*
 		
 		Tone.Transport.schedule(
@@ -55,8 +54,8 @@ class Main extends App {
 		this.tabs.textColor = "#ffffff";
 		this.tab_mast = this.tabs.getLayout(0);
 		this.tab_inst = this.tabs.getLayout(1);
-		this.tab_pat = this.tabs.getLayout(2);
-		this.tab_seq = this.tabs.getLayout(3);
+		this.tab_seq = this.tabs.getLayout(2);
+		this.tab_dm = this.tabs.getLayout(3);
 		this.tab_fx = this.tabs.getLayout(6);
 		
 		/*
@@ -132,7 +131,7 @@ class Main extends App {
 		this.sld_instid.setPadding(0.02, 0, 0.03, 0);
 		this.sld_instid.step = 1;
 		this.sld_instid.minValue = 1;
-		this.sld_instid.maxValue = 36;
+		this.sld_instid.maxValue = INST_MAX;
 		this.sld_instid.setOnChange(this.instidOnChange);
 		this.sld_instid.setOnSelect(this.instidOnSelect);
 		
@@ -193,18 +192,27 @@ class Main extends App {
 		this.sld_instpan.setOnSelect(this.instpanOnSelect);
 		
 		/*
+			Tab Sequencer Layout
+		*/
+		this.lay_seqmain =  ui.addLayout(this.tab_seq, "Linear", "Vertical", 1.0, 1.0);
+		this.lay_seqmain.backColor = "#687074";
+		this.lay_seqmain.textColor = "#fffff0";
+		this.lay_seqmain.setChildMargins(0, 0, 0, 0.01);
+		
+		this.lay_seq = ui.addLayout(this.lay_seqmain, "Linear", "Vertical, ScrollX", 1, 0.6);
+		this.lay_seq.backColor = "#333333";
+		this.txt_seq = ui.addText(this.lay_seq, "", "Monospace, Touchable", 1, 1);
+		this.txt_seq.fontFile = "fonts/PixelMplus12-Bold.ttf";
+		this.txt_seq.textSize = "16px";
+		this.txt_seq.text = this.seqf.getSequenceText(null);
+		
+		/*
 		Tab Effector Layout
 		*/
 		this.lay_fx =  ui.addLayout(this.tab_fx, "Linear", "Vertical", 1.0, 1.0);
 		this.lay_fx.backColor = "#687074";
 		this.lay_fx.textColor = "#fffff0";
 		this.lay_fx.setChildMargins(0.01, 0.01, 0, 0.01);
-		/*
-		this.tab_fxlist = ui.addTabs(this.lay_fx, items_fxlist, "Scrollable", 1, 1);
-		this.tab_fxlist.backColor = "#696999";
-		this.tab_fxlist.textColor = "#ffffff";
-		this.tab_fxlist.textSize = 10;
-		*/
 		
 	}
 	/*

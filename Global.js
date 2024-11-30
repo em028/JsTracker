@@ -5,23 +5,22 @@ var i;
 var gitUrl = "https://em028.github.io/samples/";
 
 var daw;
+var INST_MAX = 16;
 var DRAWER_HEIGHT = 0.6;
 var PFCTRL_HEIGHT = 0.08;
 var PIANO_HEIGHT = 0.23;
 
-var loops = [];
-var samples = [];
 var samplers = [];
-var instruments = Array(36);
+var instruments = Array(INST_MAX);
+var seq = Array(INST_MAX);
 var pattern = [];
 
-var items_pat = [];
 var items_patbar = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
 var navs = [["play", "play_circle_outline"], ["stop", "stop"], ["mini piano", "keyboard"]];
 //var items_on_off = ["on","off"];	
 //var items_key = ["C","Cm","C#","C#m","D","Dm","D#","D#m","E","Em","F","Fm","F#","F#m","G","Gm","G#","G#m","A","Am","A#","A#m","B","Bm"];
-var items_tab = ["Master", "Instruments", "Patterns", "Sequencer", "Drum Machine", "Loops", "Effectors"];
+var items_tab = ["Master", "Instruments", "Sequencer", "Drum Machine", "Effectors"];
 var items_lfolist = ["Amplitude LFO", "Detune LFO", "Filter LFO", "Pan LFO"];
 var items_fxlist = ["Auto Filter", "Auto Panner", "Auto Wah", "Bit Crusher", "3D Panner"];
 //var items_note = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];

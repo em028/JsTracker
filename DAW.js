@@ -26,8 +26,10 @@ class DAW {
 		//Tone.Transport.loopEnd = (60/this._bpm)*this._loopEnd*4;
 		Tone.Transport.loopEnd = this._loopEnd;
 		
-		items_pat.push("1");
-		//pattern.push(new Pattern(4));
+		for (var i=0; i<INST_MAX; i++) {
+			seq[i] = Array(128);
+			seq.fill(null);
+		}
 	}
 	
 	mastbpmChanged(main) {
@@ -55,23 +57,6 @@ class DAW {
 		main.sel_instroff.value = "-12";
 		main.sld_instq.value = 1;
 		main.txt_instq.text = "1";
-	}
-	
-	freeTempletes() {
-		if (sampleLoaded) {
-			for (var i=0; i<tmp_samples.length; i++) {
-				tmp_samples[i].stop();
-				tmp_samples[i].dispose();
-			}
-			tmp_pan.dispose();
-			tmp_vol.dispose();
-			tmp_filter.dispose();
-			tmp_filter = null;
-			tmp_samples.length = 0;
-			tmp_vol = null;
-			tmp_pan = null;
-			sampleLoaded = false;
-		}
 	}
 	
 	instsmplChanged() {

@@ -70,33 +70,8 @@ class InstrumentComponents {
 		});
 	}
 	
-	play(main) {
-		instruments[main.sld_instid.value-1].sampler.triggerAttack(main.txt_instnote.text);
-	/*
-		this.tmp_event.length = 0;
-		this.tmp_event.push(new Tone.ToneEvent( (time) => {
-			tmp_instrument.sampler.triggerAttack(["C2","C3","E4","G4","B4"], time);
-		}));
-		this.tmp_event.push(new Tone.ToneEvent( (time) => {
-			tmp_instrument.sampler.triggerRelease(["C2","C3","E4","G4","B4"], time+4);
-		}));
-		Tone.Transport.schedule((time) => {
-			for (var i=0; i<this.tmp_event.length; i++) {
-				this.tmp_event[i].start();
-			}
-		});
-		Tone.Transport.start();
-	*/
-	}
-	
 	stop(main) {
 		instruments[main.sld_instid.value-1].sampler.releaseAll();
-	/*
-		Tone.Transport.stop();
-		this.tmp_event[0].dispose();
-		this.tmp_event[1].dispose();
-		tmp_instrument.sampler.releaseAll(0);
-	*/
 	}
 	
 	volumeSelected(value) {

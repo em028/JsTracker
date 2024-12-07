@@ -199,12 +199,35 @@ class Main extends App {
 		this.lay_seqmain.textColor = "#fffff0";
 		this.lay_seqmain.setChildMargins(0, 0, 0, 0.01);
 		
-		this.lay_seq = ui.addLayout(this.lay_seqmain, "Linear", "Vertical, ScrollX", 1, 0.6);
+		this.lay_seqpos = ui.addLayout(this.lay_seqmain, "Linear", "Horizontal", 1, -1);
+		this.txt0_seqpos = ui.addText(this.lay_seqpos, "Measure: ", "Left", 0.2, -1);
+		this.txt0_seqpos.setPadding(0.02, 0.01, 0, 0);
+		this.txt_seqpos = ui.addText(this.lay_seqpos, "1", "Left", 0.1, -1);
+		this.txt_seqpos.setPadding(0.02, 0.01, 0, 0);
+		this.sld_seqpos = ui.addSlider(this.lay_seqpos, 1, "Primary", 0.7, -1);
+		this.sld_seqpos.setPadding(0.02, 0.01, 0.03, 0);
+		this.sld_seqpos.step = 1;
+		this.sld_seqpos.minValue = 1;
+		this.sld_seqpos.maxValue = SONGLENGTH_MAX;
+		this.sld_seqpos.setOnChange(this.sld_seqposOnChange);
+		this.sld_seqpos.setOnSelect(this.sld_seqposOnSelect);
+		
+		this.lay_seqskip = ui.addLayout(this.lay_seqmain, "Linear", "Horizpntal", 1, -1);
+		this.btn_seqskip1 = ui.addButton(this.lay_seqskip, "<<", "Small", -1, -1);
+		this.btn_seqskip2 = ui.addButton(this.lay_seqskip, "<", "Small", -1, -1);
+		this.btn_seqskip3 = ui.addButton(this.lay_seqskip, ">", "Small", -1, -1);
+		this.btn_seqskip4 = ui.addButton(this.lay_seqskip, ">>", "Small", -1, -1);
+		
+		this.lay_seq = ui.addLayout(this.lay_seqmain, "Linear", "Vertical, ScrollXY", 1, 0.5);
 		this.lay_seq.backColor = "#333333";
-		this.txt_seq = ui.addText(this.lay_seq, "", "Monospace, Touchable", 1, 1);
+		this.txt_seq = ui.addTextField(this.lay_seq, "", "Text, Multiline", 1, 1);
+		this.txt_seq.minRows = 100;
+		this.txt_seq.maxRows = 100;
 		this.txt_seq.fontFile = "fonts/PixelMplus12-Bold.ttf";
-		this.txt_seq.textSize = "16px";
 		this.txt_seq.text = this.seqf.getSequenceText(null);
+		this.txt_seq.setPadding(0, 0.015, 0, 0);
+		this.txt_seq.textSize = "18px";
+		this.txt_seq.textColor = "#fffff0";
 		
 		/*
 		Tab Effector Layout
@@ -213,6 +236,7 @@ class Main extends App {
 		this.lay_fx.backColor = "#687074";
 		this.lay_fx.textColor = "#fffff0";
 		this.lay_fx.setChildMargins(0.01, 0.01, 0, 0.01);
+		
 		
 	}
 	/*
@@ -286,6 +310,17 @@ class Main extends App {
 	
 	instpanOnSelect(value) {
 		this.inst.panningChanged(this, value);
+	}
+	
+	/*
+		Tab Sequencer Layout Controller
+	*/
+	sld_seqposOnChange(value) {
+		this.txt_seqpos.text = value;
+	}
+	
+	sld_seqposOnSelect(value) {
+		
 	}
 	
 }

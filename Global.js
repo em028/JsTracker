@@ -5,10 +5,12 @@ var i;
 var gitUrl = "https://em028.github.io/samples/";
 
 var daw;
-var INST_MAX = 16;
-var DRAWER_HEIGHT = 0.6;
-var PFCTRL_HEIGHT = 0.08;
-var PIANO_HEIGHT = 0.23;
+const INST_MAX = 16;
+const SONGLENGTH_MAX = 128;
+const EVENTLENGTH_MAX = 128;
+const DRAWER_HEIGHT = 0.6;
+const PFCTRL_HEIGHT = 0.08;
+const PIANO_HEIGHT = 0.23;
 
 var samplers = [];
 var instruments = Array(INST_MAX);

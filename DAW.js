@@ -27,7 +27,7 @@ class DAW {
 		Tone.Transport.loopEnd = this._loopEnd;
 		
 		for (var i=0; i<INST_MAX; i++) {
-			seq[i] = Array(128);
+			seq[i] = Array(SONGLENGTH_MAX);
 			seq.fill(null);
 		}
 	}
